@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0e17">
+<meta name="description" content="CSSだけでどこまでできる？12種類の標準CSS機能を操作して学ぶ実験室。">
+<meta property="og:title" content="CSS Native Lab — CSS標準機能の実験室">
+<meta property="og:description" content="レイアウト、状態、アニメーション、新しいCSS機能を12種類のデモで実験。JavaScript不使用。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://naoiw.github.io/css-native-lab/">
+<title>CSS Native Lab — CSS標準機能の実験室</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="./styles/site.css">
+<link rel="stylesheet" href="./styles/experiments.css">
+</head>
+<body>
+<a class="skip-link" href="#main">本文へ移動</a>
+<header class="site-header" id="top">
+<a class="brand" href="#top"><span aria-hidden="true">{ }</span> CSS <strong>NATIVE</strong> LAB</a>
+<nav class="header-links" aria-label="関連サイト"><a href="https://naoiw.github.io/web-native-lab/" target="_blank" rel="noopener noreferrer">HTML LAB ↗</a><a href="https://github.com/naoiw/css-native-lab" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></nav>
+</header>
+<main id="main">
+<section class="hero shell">
+<div class="hero-copy">
+<p class="eyebrow"><span class="dot" aria-hidden="true"></span> EXPERIMENTAL STYLESHEETS / VOL.01</p>
+<h1><span class="outline">CSS</span>だけで、<br><em>どこまで</em>できる？</h1>
+<p class="hero-desc">レイアウト、状態、アニメーション、そして次世代のCSS。<br>ブラウザが持つ機能を、見て・触って・ソースを読むための実験室です。</p>
+<div class="hero-links"><a class="btn primary" href="#layout">実験を始める ↘</a><a class="btn secondary" href="#about">ABOUT THE LAB</a></div>
+<div class="stats"><div><strong>12</strong><span>LIVE EXPERIMENTS</span></div><div><strong>CSS</strong><span>PRIMARY LANGUAGE</span></div><div><strong>0</strong><span>JAVASCRIPT</span></div></div>
+</div>
+<div class="hero-art" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="hero-core"><strong>CSS</strong><small>{ STYLE SYSTEM }</small></div><span class="art-label label-a">@property</span><span class="art-label label-b">:has()</span><span class="art-label label-c">container</span></div>
+</section>
+<div class="workspace shell">
+<aside class="sidebar"><p>EXPERIMENT INDEX</p><nav aria-label="実験カテゴリ"><a href="#layout">01 / LAYOUT</a><a href="#state">02 / STATE</a><a href="#motion">03 / MOTION</a><a href="#new">04 / NEW FEATURES</a><a href="#about">05 / ABOUT</a></nav><p class="sidebar-note">CSS IS NOT JUST PAINT.<br>IT'S A SYSTEM.</p></aside>
+<div class="content"><section class="chapter" id="layout" aria-labelledby="title-layout"><div class="chapter-head"><div><p class="eyebrow">01 / LAYOUT / GEOMETRY</p><h2 id="title-layout">形と配置を、<br>ブラウザに任せる。</h2></div><span>03 EXPERIMENTS</span></div><div class="cards"><article class="card" id="container-queries">
+<div class="card-meta"><span>01 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>Container Queries</h3><p class="card-desc">親要素の幅に応じてレイアウトを変更します。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="cq-frame"><div class="cq-card"><b>▧</b><span><strong>Adaptive card</strong><small>Container aware</small></span><em>RESPONSIVE</em></div></div></div>
+<p class="hint">枠の右下をドラッグして幅を変えてください。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>@container (min-width: 300px) { .card { display:flex; } }</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="grid-auto-fit">
+<div class="card-meta"><span>02 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>Grid auto-fit</h3><p class="card-desc">メディアクエリなしで列数を自動調整します。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="grid-frame"><div class="grid-demo"><span>01</span><span>02</span><span>03</span><span>04</span></div></div></div>
+<p class="hint">枠の右下をドラッグして幅を変えてください。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>grid-template-columns: repeat(auto-fit, minmax(min(100%, 100px), 1fr));</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/repeat" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="aspect-ratio">
+<div class="card-meta"><span>03 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>aspect-ratio</h3><p class="card-desc">幅が変わっても縦横の比率を保持できます。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="ratio-demo"><div class="ratio-wide">16:9</div><div class="ratio-square">1:1</div><div class="ratio-tall">3:4</div></div></div>
+<p class="hint">画面をリサイズして形の比率を比べてください。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>aspect-ratio: 16 / 9;</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article></div></section><section class="chapter" id="state" aria-labelledby="title-state"><div class="chapter-head"><div><p class="eyebrow">02 / STATE / COMPOSITION</p><h2 id="title-state">状態と配色を、<br>CSSのルールで。</h2></div><span>03 EXPERIMENTS</span></div><div class="cards"><article class="card" id="has-state">
+<div class="card-meta"><span>04 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>疑似クラス :has()</h3><p class="card-desc">子要素の状態によって親の外観を変更できます。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="has-demo"><label><input type="checkbox"> NIGHT MODE</label><div class="has-panel"><strong>CSS reacts.</strong><span>No JavaScript needed.</span></div></div></div>
+<p class="hint">スイッチをON/OFFしてみてください。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>.panel:has(input:checked) .preview { background: #182344; }</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:has" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="nesting">
+<div class="card-meta"><span>05 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>CSS Nesting</h3><p class="card-desc">ネストしたセレクタでホバーやフォーカスの状態を表現します。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><a class="nest-demo" href="#nesting"><span>↗</span><strong>HOVER / FOCUS</strong><small>Nested selectors</small></a></div>
+<p class="hint">タイルにホバーするかTabでフォーカスしてください。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>.tile { &amp;:hover { transform: translateY(-5px); } }</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting/Using_CSS_nesting" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="color-mix">
+<div class="card-meta"><span>06 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>color-mix()</h3><p class="card-desc">基準色からCSSだけで新しい色を生成します。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="color-demo"><div class="color-choices"><label><input type="radio" name="mix-color" value="mint" checked> MINT</label><label><input type="radio" name="mix-color" value="rose"> ROSE</label><label><input type="radio" name="mix-color" value="blue"> BLUE</label></div><div class="color-swatches"><span>LIGHT</span><span>DARK</span></div></div></div>
+<p class="hint">色を選択するとスウォッチが変わります。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>background: color-mix(in oklab, var(--accent) 65%, white);</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article></div></section><section class="chapter" id="motion" aria-labelledby="title-motion"><div class="chapter-head"><div><p class="eyebrow">03 / MOTION / SCROLL</p><h2 id="title-motion">時間もスクロールも、<br>CSSの仕事。</h2></div><span>03 EXPERIMENTS</span></div><div class="cards"><article class="card" id="property">
+<div class="card-meta"><span>07 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>@property</h3><p class="card-desc">型付きカスタムプロパティでゲージをアニメーションさせます。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="property-demo"><div class="property-dial"><span>CSS</span></div><p>ANIMATED<br>&lt;angle&gt;</p></div></div>
+<p class="hint">動く円形のゲージはJavaScript不使用です。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>@property --sweep { syntax:"&lt;angle&gt;"; inherits:false; initial-value:0deg; }</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/@property" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="scroll-driven">
+<div class="card-meta"><span>08 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>Scroll-driven Animations</h3><p class="card-desc">スクロール位置をタイムラインとして利用します。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="scroll-demo" tabindex="0" aria-label="スクロール位置に連動するアニメーション"><div class="scroll-progress"></div><div class="scroll-text"><strong>SCROLL DOWN ↓</strong><p>01 — Scroll is the timeline.</p><p>02 — No scroll event listeners.</p><p>03 — The browser updates progress.</p><p>04 — Scroll up to reverse.</p><b>YOU REACHED THE END ✓</b></div></div></div>
+<p class="hint">枠内をスクロールすると上のバーが伸びます。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>animation: fill linear both; animation-timeline: scroll(nearest block);</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="scroll-snap">
+<div class="card-meta"><span>09 / 12</span><span class="tag ">PURE CSS</span></div>
+<h3>Scroll Snap</h3><p class="card-desc">スクロールするカードが所定の位置で吸着します。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="snap-demo" tabindex="0" aria-label="横スクロールするカード"><div><span>01</span><b>LAYOUT</b></div><div><span>02</span><b>COLOR</b></div><div><span>03</span><b>MOTION</b></div><div><span>04</span><b>CSS</b></div></div></div>
+<p class="hint">横へスワイプして試してください。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>scroll-snap-type: x mandatory; scroll-snap-align: start;</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article></div></section><section class="chapter" id="new" aria-labelledby="title-new"><div class="chapter-head"><div><p class="eyebrow">04 / NEW / CREATIVE</p><h2 id="title-new">新しい表現を、<br>その場で試す。</h2></div><span>03 EXPERIMENTS</span></div><div class="cards"><article class="card" id="anchor">
+<div class="card-meta"><span>10 / 12</span><span class="tag tag-new">PROGRESSIVE</span></div>
+<h3>Anchor Positioning</h3><p class="card-desc">ボタンの位置を基準にPopoverを配置できます。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="anchor-demo"><button id="anchor-button" type="button" popovertarget="anchor-panel">OPEN TOOLTIP ↗</button><div id="anchor-panel" popover><strong>CSS ANCHORED</strong><p>Popover attached to the trigger.</p></div></div></div>
+<p class="hint">ボタンを押してください。未対応環境では中央に表示されます。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>button { anchor-name: --trigger; } [popover] { position-anchor: --trigger; position-area: bottom; }</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="starting-style">
+<div class="card-meta"><span>11 / 12</span><span class="tag tag-new">PROGRESSIVE</span></div>
+<h3>@starting-style</h3><p class="card-desc">表示直後のスタイルを定義して登場演出を付けます。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="starting-demo"><button type="button" popovertarget="entrance-panel">SHOW PANEL ↗</button><div id="entrance-panel" popover><strong>HELLO CSS.</strong><p>Enter and exit transitions.</p><button type="button" popovertarget="entrance-panel" popovertargetaction="hide">CLOSE ×</button></div></div></div>
+<p class="hint">開閉を繰り返してください。未対応なら演出を省略します。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>@starting-style { [popover]:popover-open { opacity:0; } }</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article><article class="card" id="masks">
+<div class="card-meta"><span>12 / 12</span><span class="tag tag-new">PROGRESSIVE</span></div>
+<h3>mask-image</h3><p class="card-desc">CSSマスクで表示する部分を切り抜きます。</p>
+<div class="demo"><span class="demo-label">LIVE EXPERIMENT</span><div class="mask-demo" tabindex="0" aria-label="ホバーするとマスク範囲が広がる"><div class="mask-art"><small>PURE</small><strong>CSS</strong><span>UNMASK THE LAYERS</span></div></div></div>
+<p class="hint">パネルにホバー、またはフォーカスしてください。</p>
+<details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>mask-image: radial-gradient(circle, black 40%, transparent 70%);</code></pre></details>
+<a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
+</article></div></section><section class="about" id="about"><p class="eyebrow">05 / ABOUT</p><h2>フレームワークに頼る前に、<br>標準CSSを知ろう。</h2><p>CSS Native Labは、外部ライブラリもJavaScriptも使わず、CSSの表現と仕組みを実験するサイトです。すべての実験に操作できるデモ、最小限のコード例、MDNリンクを掲載しています。ブラウザの対応状況によって一部の見え方は異なります。</p><div class="about-grid"><div><span>01</span><strong>PURE CSS</strong><p>状態や演出をCSSで制御</p></div><div><span>02</span><strong>REAL BROWSER</strong><p>ブラウザ実装を比較・体験</p></div><div><span>03</span><strong>OPEN SOURCE</strong><p>すべてのコードを公開</p></div></div><a class="btn secondary" href="https://github.com/naoiw/css-native-lab" target="_blank" rel="noopener noreferrer">VIEW REPOSITORY ↗</a></section>
+</div></div></main><footer class="footer shell"><span>CSS NATIVE LAB <b>●</b> BUILT WITH THE PLATFORM</span><span>© 2026 <a href="https://github.com/naoiw">naoiw</a> · <a href="https://naoiw.github.io/web-native-lab/">WEB NATIVE LAB</a></span></footer>
+</body></html>

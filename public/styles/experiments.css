@@ -1,0 +1,168 @@
+/* 01: Container Queries; resize the container instead of the viewport. */
+.cq-frame{container:lab-card/inline-size;resize:horizontal;overflow:auto;width:100%;min-width:150px;max-width:100%;
+  padding:6px;outline:1px dashed #56837e;border-radius:5px}
+.cq-card{display:grid;gap:9px;align-items:center;min-height:120px;padding:12px;
+  background:#183340;border:1px solid #375966;border-radius:5px}
+.cq-card>b{display:grid;place-items:center;width:42px;height:42px;border-radius:8px;background:var(--accent);
+  color:#14231b;font-size:23px}
+.cq-card strong{display:block;font-size:13px}
+.cq-card small{display:block;font-size:11px;margin-top:6px;color:#94b0b5}
+.cq-card em{justify-self:start;font:800 9px ui-monospace,Consolas,monospace;font-style:normal;
+  color:var(--accent);border:1px solid #689886;border-radius:4px;padding:5px}
+@container lab-card (min-width:280px){
+ .cq-card{grid-template-columns:42px 1fr;min-height:94px}
+ .cq-card em{grid-column:2}
+}
+@container lab-card (min-width:410px){
+ .cq-card{grid-template-columns:42px 1fr auto;min-height:90px}
+ .cq-card em{grid-column:auto}
+}
+
+/* 02: CSS Grid auto-fit - no media queries. */
+.grid-frame{resize:horizontal;overflow:auto;width:100%;min-width:150px;max-width:100%;
+ padding:6px;outline:1px dashed #56837e;border-radius:5px}
+.grid-demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,100px),1fr));gap:8px}
+.grid-demo span{display:grid;place-items:center;min-height:96px;background:linear-gradient(140deg,#24494d,#304758);
+  border:1px solid #64867d;border-radius:5px;color:var(--accent);
+  font:900 18px ui-monospace,Consolas,monospace}
+
+/* 03: aspect ratio */
+.ratio-demo{display:flex;align-items:center;justify-content:center;gap:10px;max-width:100%}
+.ratio-demo>div{flex:1 1 0;min-width:0;display:grid;place-items:center;
+  border:1px solid #749ba0;border-radius:6px;background:#214955;
+  font:800 12px ui-monospace,Consolas,monospace;color:#e0fffa}
+.ratio-demo .ratio-wide{aspect-ratio:16/9}
+.ratio-demo .ratio-square{aspect-ratio:1;background:#374765}
+.ratio-demo .ratio-tall{aspect-ratio:3/4;flex:.72 1 0;background:#59486f}
+
+/* 04: :has() child state -> parent state */
+.has-demo{display:grid;gap:13px}
+.has-demo label{display:inline-flex;align-items:center;gap:8px;color:#d3e8d6;
+  font:800 11px ui-monospace,Consolas,monospace;cursor:pointer}
+.has-demo input{width:16px;height:16px;accent-color:var(--accent)}
+.has-panel{min-height:108px;background:#e7f4e2;color:#173125;border:1px solid #c5d6bd;
+  display:grid;place-content:center;justify-items:center;gap:7px;border-radius:8px;
+  transition:background .25s,color .25s,border-color .25s}
+.has-panel strong{font-size:18px}
+.has-panel span{font-size:11px}
+.has-demo:has(input:checked) .has-panel{background:#243254;color:#e8f0ff;border-color:#788cb6}
+
+/* 05: CSS Nesting - real nested rule syntax */
+.nest-demo{
+ position:relative;display:grid;align-content:center;justify-items:center;gap:7px;min-height:148px;
+ color:#e8faff;text-decoration:none;border-radius:7px;border:1px solid #547c83;
+ background:linear-gradient(135deg,#233b51,#244153);
+ transition:transform .22s,border-color .22s,box-shadow .22s;
+ span{position:absolute;right:14px;top:12px;padding:5px 8px;background:#37606a;border-radius:5px;
+  color:var(--accent);font-size:17px;transition:rotate .22s}
+ strong{font:800 15px ui-monospace,Consolas,monospace}
+ small{font:700 10px ui-monospace,Consolas,monospace;color:#aec4c7}
+ &:is(:hover,:focus-visible){
+   transform:translateY(-5px);border-color:var(--accent);box-shadow:0 17px 20px #0005;
+   span{rotate:45deg;background:#416b51}
+ }
+}
+
+/* 06: color-mix with radio state and CSS custom property */
+.color-demo{--mix-base:#78e3ac;display:grid;gap:15px}
+.color-demo:has(input[value="rose"]:checked){--mix-base:#ff85a4}
+.color-demo:has(input[value="blue"]:checked){--mix-base:#75b8ff}
+.color-choices{display:flex;gap:10px;flex-wrap:wrap}
+.color-choices label{display:inline-flex;align-items:center;gap:4px;color:#d6e6e9;
+  font:750 10px ui-monospace,Consolas,monospace;cursor:pointer}
+.color-choices input{accent-color:var(--mix-base)}
+.color-swatches{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.color-swatches>span{display:flex;align-items:end;padding:12px;min-height:115px;
+  border-radius:6px;font:800 11px ui-monospace,Consolas,monospace;
+  transition:background .2s}
+.color-swatches>span:first-child{background:color-mix(in oklab,var(--mix-base) 65%,white);color:#17302d}
+.color-swatches>span:last-child{background:color-mix(in oklab,var(--mix-base) 45%,#060e1a);color:#f1fffa}
+
+/* 07: Typed custom properties */
+@property --sweep{syntax:"<angle>";inherits:false;initial-value:0deg}
+.property-demo{display:flex;align-items:center;justify-content:center;gap:19px;flex-wrap:wrap}
+.property-dial{--sweep:0deg;position:relative;display:grid;place-items:center;
+  width:125px;height:125px;aspect-ratio:1;border-radius:50%;
+  background:conic-gradient(var(--accent) var(--sweep),#203741 var(--sweep));
+  animation:dial-sweep 3s linear infinite}
+.property-dial::before{content:"";position:absolute;inset:14px;background:#0d2028;border-radius:50%}
+.property-dial span{z-index:1;color:var(--accent);font:900 21px ui-monospace,Consolas,monospace}
+.property-demo>p{font:800 11px/1.8 ui-monospace,Consolas,monospace;color:#a6c8ca}
+@keyframes dial-sweep{to{--sweep:360deg}}
+
+/* 08: Scroll-driven animations; passive/no event handlers */
+.scroll-demo{height:160px;max-width:100%;overflow-y:auto;background:#13263a;
+  border:1px solid #426675;border-radius:6px;scrollbar-color:#5b8c7e transparent}
+.scroll-progress{position:sticky;top:0;z-index:1;height:5px;background:var(--accent);
+  scale:0 1;transform-origin:left center}
+@supports(animation-timeline:scroll()){
+ .scroll-progress{animation:fill-scroll linear both;animation-timeline:scroll(nearest block)}
+}
+@keyframes fill-scroll{from{scale:0 1}to{scale:1 1}}
+.scroll-text{padding:16px 16px 23px;color:#bdd1d8;font-size:12px;line-height:1.85}
+.scroll-text strong{font:800 12px ui-monospace,Consolas,monospace;color:var(--accent)}
+.scroll-text p{margin:0 0 28px}
+.scroll-text b{font:800 11px ui-monospace,Consolas,monospace;color:var(--accent)}
+
+/* 09: Horizontal snapping - same mechanism on touch and mouse */
+.snap-demo{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+  overscroll-behavior-inline:contain;scrollbar-color:#5e8e89 transparent;padding-bottom:8px}
+.snap-demo>div{flex:0 0 72%;min-height:143px;padding:15px;border-radius:6px;
+  border:1px solid #739f92;background:linear-gradient(130deg,#274b4f,#294058);
+  scroll-snap-align:start;display:flex;justify-content:space-between;flex-direction:column}
+.snap-demo>div:nth-child(2){background:linear-gradient(130deg,#3d4a7a,#293c68)}
+.snap-demo>div:nth-child(3){background:linear-gradient(130deg,#624754,#4b3650)}
+.snap-demo>div:nth-child(4){background:linear-gradient(130deg,#425c42,#244838)}
+.snap-demo span{font:800 12px ui-monospace,Consolas,monospace;color:var(--accent)}
+.snap-demo b{font:850 19px ui-monospace,Consolas,monospace}
+
+/* 10: CSS Anchor Positioning, centered popover fallback */
+.anchor-demo,.starting-demo{min-height:115px;display:grid;place-items:center}
+.anchor-demo>button,.starting-demo>button{background:#24473b;color:var(--accent);border:1px solid #7db78e;
+  padding:12px 16px;border-radius:5px;font:800 11px ui-monospace,Consolas,monospace}
+.anchor-demo>button:hover,.starting-demo>button:hover{background:#305543}
+#anchor-button{anchor-name:--anchor-trigger}
+#anchor-panel{
+  background:#1e3533;color:#e8fff2;border:1px solid #87c49c;border-radius:8px;
+  padding:19px;max-width:min(270px,calc(100vw - 30px));box-shadow:0 24px 70px #000a;
+  position:fixed;inset:0;margin:auto}
+#anchor-panel strong{font:850 13px ui-monospace,Consolas,monospace;color:var(--accent)}
+#anchor-panel p{font-size:12px;color:#b6d4c8;line-height:1.7}
+@supports(position-area:bottom){
+ #anchor-panel{position-anchor:--anchor-trigger;position-area:bottom;inset:auto;
+  margin:9px 0 0;position-try-fallbacks:flip-block}
+}
+
+/* 11: @starting-style + discrete transitions */
+#entrance-panel{
+ background:#29243a;color:#f5eaff;border:1px solid #b5a2d4;border-radius:9px;padding:21px;
+ max-width:min(330px,calc(100vw - 30px));box-shadow:0 24px 70px #000a;
+ opacity:0;translate:0 14px;
+ transition:opacity .25s ease,translate .25s ease,display .25s allow-discrete,overlay .25s allow-discrete}
+#entrance-panel:popover-open{opacity:1;translate:0 0}
+@starting-style{
+ #entrance-panel:popover-open{opacity:0;translate:0 14px}
+}
+#entrance-panel strong{font:850 15px ui-monospace,Consolas,monospace;color:#e2caff}
+#entrance-panel p{font-size:12px;color:#cbbfd7;line-height:1.65}
+#entrance-panel>button{background:#3b3452;border:1px solid #bb9ee1;border-radius:5px;
+ color:#efe0ff;padding:8px 12px;font:800 11px ui-monospace,Consolas,monospace}
+
+/* 12: CSS masks with pure gradient art */
+.mask-demo{min-height:165px;display:grid;place-items:center;cursor:crosshair;
+ background:repeating-linear-gradient(45deg,#19303b 0 10px,#122332 10px 20px);
+ border:1px dashed #44727a;border-radius:6px}
+.mask-art{width:90%;min-height:140px;display:grid;align-content:center;justify-items:center;gap:3px;
+ background:conic-gradient(from 20deg at 40% 45%,#eebb8d,#ee96b0,#a0b5ff,#83edb7,#eebb8d);
+ color:#12252e;border-radius:7px;
+ mask-image:radial-gradient(circle at center,#000 38%,transparent 72%);
+ mask-size:55% 55%;mask-position:center;mask-repeat:no-repeat;transition:mask-size .55s}
+.mask-art small{font:900 10px ui-monospace,Consolas,monospace;letter-spacing:.17em}
+.mask-art strong{font:900 49px ui-monospace,Consolas,monospace;letter-spacing:-.07em}
+.mask-art span{font:800 9px ui-monospace,Consolas,monospace}
+.mask-demo:is(:hover,:focus-visible) .mask-art{mask-size:150% 150%}
+@media(prefers-reduced-motion:reduce){
+ .property-dial{animation:none;--sweep:180deg}
+ .scroll-progress{animation:none;scale:1}
+ .mask-art{transition:none}
+}
