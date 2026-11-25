@@ -40,12 +40,16 @@ scripts/check_site.py   最小限の構造チェック
 
 ## Pages / CI
 
-- `validate` はmainへのpush、PR、手動実行時に起動
-- `deploy` はmainのpushまたはmainでの手動実行、かつ `vars.PAGES_ENABLED == 'true'` のときのみ実行
-- 初期状態ではPages未設定のため `deploy` をスキップする
-- Pagesを使うときはSourceをGitHub Actionsにし、リポジトリ変数 `PAGES_ENABLED=true` を設定する
-- `public/` のファイルのみデプロイする。ビルド不要
-- Rulesetの必須チェックは `validate`（`deploy` は必須化しない）
+- GitHub Pages、Rulesetsの初期設定を完了
+- 公開URL: https://naoiw.github.io/css-native-lab/
+- PagesのSourceはGitHub Actions
+- `validate`: mainへのpush、PR、手動実行時に構造チェックを実施
+- `deploy`: PR以外のmain実行かつ `vars.PAGES_ENABLED == 'true'` の場合のみ実行
+- 変数の変更自体はワークフローを起動しない。必要に応じて `workflow_dispatch` で手動起動
+- デプロイ対象: `public/` のみ（ビルド不要）
+- `main` のRuleset `Protect main` は削除・force pushを制限し、PR必須（承認数0）と必須チェック `validate` を指定
+- `deploy` はPRでスキップされるためRequired status checkには指定しない
+- GitHub Actionsで `deploy` がsuccessになることを公開確認の判定にする
 
 ## 実験追加ルール
 

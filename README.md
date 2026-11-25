@@ -49,25 +49,24 @@ python3 scripts/check_site.py
 
 ローカルのファイル参照、ページ内アンカー、重複ID、12実験の存在、CSSファイル量を確認します。完全なHTML/CSSバリデータやブラウザのE2Eテストではありません。PR時にはGitHub Actionsの `validate` ジョブでも実行されます。
 
-## GitHub Pages（未設定）
+## GitHub Pages / CI
 
-**現在Pagesは有効化していません。** そのため、mainへのpush時もPagesデプロイはスキップするようにしています。
+GitHub Pages とRulesetsの初期設定は完了しています。
 
-Pagesを有効化する際は次の操作を行ってください。
+- **公開URL**: https://naoiw.github.io/css-native-lab/
+- PagesのSource: **GitHub Actions**
+- ワークフロー: `.github/workflows/site.yml`
+- Pull Request: `validate` を実行し、デプロイはしない
+- `main` へのpush: `validate` 成功後、`PAGES_ENABLED=true` の場合のみ `deploy` を実行
+- サイトは `public/` の静的ファイルから公開。Node.js・npm・シークレットは不要
 
-1. [Settings → Pages](https://github.com/naoiw/css-native-lab/settings/pages) → Sourceを **GitHub Actions** にする
-2. [Settings → Actions → Variables](https://github.com/naoiw/css-native-lab/settings/variables/actions) でリポジトリ変数 `PAGES_ENABLED` を追加し、値を `true` にする
-3. mainへpushするか [Actions](https://github.com/naoiw/css-native-lab/actions) の `Site` ワークフローを手動実行する
+リポジトリ変数 `PAGES_ENABLED` は安全のためのデプロイスイッチです。`deploy` がスキップされた場合は、[Actions Variables](https://github.com/naoiw/css-native-lab/settings/variables/actions) で値が `true` になっているか確認してください。変数の変更そのものはワークフローを起動しないため、[Actions](https://github.com/naoiw/css-native-lab/actions/workflows/site.yml) から `Run workflow` を行うか、`main` の変更をマージして再実行します。
 
-公開予定URL: https://naoiw.github.io/css-native-lab/
+## Rulesets
 
-シークレットの追加は不要です。公開後はこの「未設定」の文言を更新します。
+`main` には `Protect main` を設定済みです。PR必須（承認数0）、削除・force pushの制限、必須チェック `validate` を適用しています。
 
-## Rulesets（後で設定）
-
-[Rulesets](https://github.com/naoiw/css-native-lab/settings/rules) でmainを保護します。削除・force push禁止、PR必須（承認数0）を推奨します。
-
-Required status checksには **`validate`** を追加してください。**`deploy` はPRでは実行されないため、必須チェックに設定しない**でください。
+`deploy` はPRで実行されないため、必須チェックに追加しないでください。
 
 ## 設計方針
 
