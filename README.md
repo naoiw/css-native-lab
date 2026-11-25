@@ -57,10 +57,10 @@ GitHub Pages とRulesetsの初期設定は完了しています。
 - PagesのSource: **GitHub Actions**
 - ワークフロー: `.github/workflows/site.yml`
 - Pull Request: `validate` を実行し、デプロイはしない
-- `main` へのpush: `validate` 成功後、`PAGES_ENABLED=true` の場合のみ `deploy` を実行
+- `main` へのpush: `validate` 成功後、自動的に `deploy` を実行
 - サイトは `public/` の静的ファイルから公開。Node.js・npm・シークレットは不要
 
-リポジトリ変数 `PAGES_ENABLED` は安全のためのデプロイスイッチです。`deploy` がスキップされた場合は、[Actions Variables](https://github.com/naoiw/css-native-lab/settings/variables/actions) で値が `true` になっているか確認してください。変数の変更そのものはワークフローを起動しないため、[Actions](https://github.com/naoiw/css-native-lab/actions/workflows/site.yml) から `Run workflow` を行うか、`main` の変更をマージして再実行します。
+デプロイにリポジトリ変数や専用シークレットは不要です。`main` へのマージで自動公開されます。必要に応じて [Actions](https://github.com/naoiw/css-native-lab/actions/workflows/site.yml) から `Run workflow` で再実行できます。
 
 ## Rulesets
 

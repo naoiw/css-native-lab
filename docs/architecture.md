@@ -44,8 +44,8 @@ scripts/check_site.py   最小限の構造チェック
 - 公開URL: https://naoiw.github.io/css-native-lab/
 - PagesのSourceはGitHub Actions
 - `validate`: mainへのpush、PR、手動実行時に構造チェックを実施
-- `deploy`: PR以外のmain実行かつ `vars.PAGES_ENABLED == 'true'` の場合のみ実行
-- 変数の変更自体はワークフローを起動しない。必要に応じて `workflow_dispatch` で手動起動
+- `deploy`: PR以外で `main` のコミットが対象なら、`validate` 成功後に自動実行
+- リポジトリ変数 `PAGES_ENABLED` は不要。必要に応じて `workflow_dispatch` で手動再実行
 - デプロイ対象: `public/` のみ（ビルド不要）
 - `main` のRuleset `Protect main` は削除・force pushを制限し、PR必須（承認数0）と必須チェック `validate` を指定
 - `deploy` はPRでスキップされるためRequired status checkには指定しない
