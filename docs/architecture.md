@@ -19,7 +19,8 @@
 ```
 public/
   index.html             12件の実験カタログ
-  styles/site.css        共通レイアウト・デザイン
+  styles/site.css        サイト内のレイアウト・デザイン
+  lab-chrome.css         姉妹サイト共通のヘッダー・フッターとコンテンツ幅
   styles/experiments.css 各実験の動作CSS
   favicon.svg
   robots.txt
@@ -27,6 +28,10 @@ public/
 scripts/check_site.py   最小限の構造チェック
 .github/workflows/site.yml
 ```
+
+## 共通ヘッダー・フッター
+
+`public/lab-chrome.css` は `naoiw/web-native-lab` と `naoiw/css-native-lab` で同一内容です。最大コンテンツ幅を1360pxに統一し、ヘッダー・フッターのフォント、文字サイズ、間隔、スマホ表示も一致させています。サイト名・ロゴ記号・アクセントカラー・MDNリンク先は各サイト固有です。共通デザインを変更する際は両方のCSSを更新してください。CSSファイルはそれぞれのリポジトリ内で配信し、相互のデプロイには依存しません。
 
 ## 互換性・制限
 
