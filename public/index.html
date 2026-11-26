@@ -13,12 +13,22 @@
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="stylesheet" href="./styles/site.css">
 <link rel="stylesheet" href="./styles/experiments.css">
+<link rel="stylesheet" href="./lab-chrome.css">
 </head>
 <body>
 <a class="skip-link" href="#main">本文へ移動</a>
 <header class="site-header" id="top">
-<a class="brand" href="#top"><span aria-hidden="true">{ }</span> CSS <strong>NATIVE</strong> LAB</a>
-<nav class="header-links" aria-label="関連サイト"><a href="https://naoiw.github.io/web-native-lab/" target="_blank" rel="noopener noreferrer">HTML LAB ↗</a><a href="https://developer.mozilla.org/ja/docs/Web/CSS" target="_blank" rel="noopener noreferrer">MDN ↗</a><a href="https://github.com/naoiw/css-native-lab" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></nav>
+  <div class="header-inner shell">
+    <a class="brand" href="#top" aria-label="CSS Native Lab トップへ">
+      <span class="brand-mark" aria-hidden="true">{ }</span>
+      <span>CSS <strong>NATIVE</strong> LAB</span>
+    </a>
+    <nav class="header-links" aria-label="関連サイト">
+      <a href="https://naoiw.github.io/web-native-lab/" target="_blank" rel="noopener noreferrer">HTML LAB <span aria-hidden="true">↗</span></a>
+      <a href="https://developer.mozilla.org/ja/docs/Web/CSS" target="_blank" rel="noopener noreferrer">MDN <span aria-hidden="true">↗</span></a>
+      <a href="https://github.com/naoiw/css-native-lab" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
 </header>
 <main id="main">
 <section class="hero shell">
@@ -118,5 +128,8 @@
 <details class="source"><summary>VIEW CSS SOURCE <span aria-hidden="true">＋</span></summary><pre><code>mask-image: radial-gradient(circle, black 40%, transparent 70%);</code></pre></details>
 <a class="reference" href="https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image" target="_blank" rel="noopener noreferrer">MDN REFERENCE ↗</a>
 </article></div></section><section class="about" id="about"><p class="eyebrow">05 / ABOUT</p><h2>フレームワークに頼る前に、<br>標準CSSを知ろう。</h2><p>CSS Native Labは、外部ライブラリもJavaScriptも使わず、CSSの表現と仕組みを実験するサイトです。すべての実験に操作できるデモ、最小限のコード例、MDNリンクを掲載しています。ブラウザの対応状況によって一部の見え方は異なります。</p><div class="about-grid"><div><span>01</span><strong>PURE CSS</strong><p>状態や演出をCSSで制御</p></div><div><span>02</span><strong>REAL BROWSER</strong><p>ブラウザ実装を比較・体験</p></div><div><span>03</span><strong>OPEN SOURCE</strong><p>すべてのコードを公開</p></div></div><a class="btn secondary" href="https://github.com/naoiw/css-native-lab" target="_blank" rel="noopener noreferrer">VIEW REPOSITORY ↗</a></section>
-</div></div></main><footer class="footer shell"><span>CSS NATIVE LAB <b>●</b> BUILT WITH THE PLATFORM</span><span>© 2026 <a href="https://github.com/naoiw">naoiw</a> · <a href="https://naoiw.github.io/web-native-lab/">WEB NATIVE LAB</a></span></footer>
+</div></div></main><footer class="site-footer shell">
+  <span>CSS NATIVE LAB <span class="footer-dot" aria-hidden="true">●</span> BUILT WITH THE PLATFORM</span>
+  <span>© 2026 <a href="https://github.com/naoiw">naoiw</a> · <a href="https://naoiw.github.io/web-native-lab/">WEB NATIVE LAB</a></span>
+</footer>
 </body></html>
