@@ -1,77 +1,81 @@
 # CSS Native Lab
 
-CSS標準機能を実際に触って学ぶ、フレームワーク不要の実験サイトです。[Web Native Lab](https://github.com/naoiw/web-native-lab) の姉妹プロジェクトです。
+CSS標準機能を、ブラウザ上で操作しながら学べる実験サイトです。レイアウト・状態制御・アニメーションなどを、JavaScriptや外部ライブラリを使わずに実装しています。[Web Native Lab](https://github.com/naoiw/web-native-lab) の姉妹プロジェクトです。
 
-**リポジトリ:** https://github.com/naoiw/css-native-lab
+## 主な機能
 
-- CSSが主言語（実装コードを `styles/*.css` に集約）
-- **JavaScript 0行**、npm・バンドラ・外部UIライブラリなし
-- 12種類の実験。各デモは操作可能で、短いCSSコード例・MDNリンク付き
-- 新しいCSS機能は段階的に適用し、未対応時の代替表示を用意
-- キーボードフォーカス・動きの低減設定に配慮
+- **12種類のCSS実験**：実際に操作できるデモと、CSSの最小コード例を掲載
+- **MDNリファレンス**：各実験から仕様やブラウザ対応状況を確認可能
+- **CSSのみで動作**：フレームワーク・JavaScript・ビルドツール・バックエンド不要
+- **レスポンシブUI**：PC・スマートフォン向けの表示、キーボード操作、OSの「動きを減らす」設定に配慮
 
-## 実験一覧
+| 分類 | 実験 |
+| --- | --- |
+| レイアウト | Container Queries、Grid auto-fit、`aspect-ratio` |
+| 状態・配色 | `:has()`、CSS Nesting、`color-mix()` |
+| アニメーション | `@property`、Scroll-driven Animations、Scroll Snap |
+| 新しいCSS機能 | Anchor Positioning、`@starting-style`、`mask-image` |
 
-| カテゴリ | CSS機能 | 動作 |
+一部の機能はブラウザによって対応状況が異なります。Container QueriesとGrid auto-fitの実験では、デモ領域のサイズ変更に対応するブラウザ・入力環境が必要です。Anchor Positioning未対応時はPopoverを中央に表示し、Scroll-driven Animations未対応時は進捗バーが固定されます。
+
+## 公開先
+
+| 環境 | ブランチ | URL |
 | --- | --- | --- |
-| Layout | Container Queries | コンテナ幅で部品が変わる |
-| Layout | Grid auto-fit | コンテナ幅で列数を自動調整 |
-| Layout | aspect-ratio | 縦横比を維持 |
-| State | :has() | 子要素のチェック状態で見た目を変更 |
-| State | CSS Nesting | ネストしたホバー / フォーカス |
-| State | color-mix() | CSSのみで配色を合成 |
-| Motion | @property | 型付きカスタムプロパティをアニメーション |
-| Motion | Scroll-driven Animations | スクロールに連動するプログレスバー |
-| Motion | Scroll Snap | スクロール位置を吸着 |
-| New | Anchor Positioning | 要素に追従するPopover |
-| New | @starting-style | Popoverの登場・退場演出 |
-| New | mask-image | 見える領域をマスクで切り替え |
+| 本番 | `main` | https://naoiw.github.io/css-native-lab/ |
 
-`Container Queries` や `Grid auto-fit` のデモは、右下のリサイズハンドルをドラッグして試します。タッチ端末ではハンドルが操作できない場合があります。
+GitHub Pagesで公開しています。開発プレビュー用の常設ブランチは設けていません。
 
-**Progressive** 機能はブラウザごとに対応状況が異なります。Anchor Positioningは未対応時に中央表示、Scroll-driven Animationsは未対応時にバーが固定となります。各デモのMDNリンクで対応状況を確認してください。
+## 技術スタック
 
-## ローカル実行
+- **HTML / CSS** — 画面構造と12種類の標準CSS機能の実験
+- **Python 3（標準ライブラリ）** — HTMLの参照先・アンカー・実験数などの構造チェック
+- **GitHub Actions / GitHub Pages** — PR検証と本番デプロイ
 
-`public/index.html` を直接開くか、次のようにサーバーを起動します。
+Node.js・npm・JavaScript・CSSフレームワークは使用しません。
 
-```sh
+## ローカル開発
+
+リポジトリを取得し、Python 3で静的ファイルを配信します。
+
+```bash
+git clone https://github.com/naoiw/css-native-lab.git
+cd css-native-lab
 python3 -m http.server 8000 --directory public
 ```
 
-http://localhost:8000 で確認できます。Node.js / npmは不要です。
+ブラウザで http://localhost:8000/ を開いてください。静的サイトのため `public/index.html` を直接開くこともできます。
 
-## 構造チェック
+変更後の構造チェック：
 
-```sh
+```bash
 python3 scripts/check_site.py
 ```
 
-ローカルのファイル参照、ページ内アンカー、重複ID、12実験の存在、CSSファイル量を確認します。完全なHTML/CSSバリデータやブラウザのE2Eテストではありません。PR時にはGitHub Actionsの `validate` ジョブでも実行されます。
+このチェックはローカル参照・重複ID・実験数・CSSファイル量を検査します。HTML/CSSの完全な文法検証や実ブラウザの動作試験は含みません。
 
-## GitHub Pages / CI
+## ブランチ運用
 
-GitHub Pages とRulesetsの初期設定は完了しています。
+1. `main` を本番ブランチとし、変更は作業ブランチで行います。
+2. Pull RequestではGitHub Actionsの `validate` を実行し、デプロイは行いません。
+3. `validate` 成功後にPRを `main` へマージすると、GitHub Pagesへ自動デプロイされます。
+4. Ruleset `Protect main` でPR必須・force push禁止・削除制限を適用し、`validate` を必須チェックに設定しています。
 
-- **公開URL**: https://naoiw.github.io/css-native-lab/
-- PagesのSource: **GitHub Actions**
-- ワークフロー: `.github/workflows/site.yml`
-- Pull Request: `validate` を実行し、デプロイはしない
-- `main` へのpush: `validate` 成功後、自動的に `deploy` を実行
-- サイトは `public/` の静的ファイルから公開。Node.js・npm・シークレットは不要
+## ディレクトリ構成
 
-デプロイにリポジトリ変数や専用シークレットは不要です。`main` へのマージで自動公開されます。必要に応じて [Actions](https://github.com/naoiw/css-native-lab/actions/workflows/site.yml) から `Run workflow` で再実行できます。
+- `public/index.html` — 各実験のプレビュー、説明、CSSコード例
+- `public/styles/site.css` — サイト全体のレイアウトとデザイン
+- `public/styles/experiments.css` — CSS実験の実装
+- `public/favicon.svg`、`robots.txt`、`sitemap.xml` — アイコン・検索エンジン向けファイル
+- `scripts/check_site.py` — 静的構造チェック
+- `.github/workflows/site.yml` — CI・GitHub Pagesへのデプロイ
+- `docs/` — 設計・運用資料
 
-## Rulesets
+## ドキュメント
 
-`main` には `Protect main` を設定済みです。PR必須（承認数0）、削除・force pushの制限、必須チェック `validate` を適用しています。
+- [設計・デプロイ構成](docs/architecture.md)
+- [HTML標準機能の姉妹プロジェクト：Web Native Lab](https://github.com/naoiw/web-native-lab)
 
-`deploy` はPRで実行されないため、必須チェックに追加しないでください。
+## ライセンス
 
-## 設計方針
-
-詳細は [docs/architecture.md](docs/architecture.md) を参照してください。CSSの実動作は `public/styles/experiments.css` に、サイト全体のデザインは `public/styles/site.css` に記述しています。
-
-## License
-
-[MIT](LICENSE)
+[MIT License](LICENSE)
